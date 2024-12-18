@@ -1,0 +1,4 @@
+spring:
+  application:
+    name: SpringJPA
+    version: 1.0.0
