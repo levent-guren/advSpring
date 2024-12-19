@@ -1,23 +1,30 @@
 package com.advspring.util;
 
-import java.util.Base64;
-
 import org.jasypt.util.text.AES256TextEncryptor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Security {
 	private static AES256TextEncryptor textEncrypter = new AES256TextEncryptor();
+	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(11);
 
-	public static void main(String[] args) {
-		// System.out.println(Base64.getEncoder().encodeToString("abc".getBytes()));
+	public static void setPassword(String password) {
+		textEncrypter.setPassword(password);
+	}
 
-		textEncrypter.setPassword(new String(Base64.getDecoder().decode("YWJj".getBytes())));
-//		String enc = textEncrypter.encrypt("Merhaba");
-//		System.out.println(enc);
-//		String dec = textEncrypter.decrypt(enc);
-//		System.out.println(dec);
+	public static String encrypt(String str) {
+		return textEncrypter.encrypt(str);
+	}
 
-		String val = "s/WqLu+90I/IyvDizJ/GN9dVyqvyS+L2IvX6PZ9eYfScGoAZPmpRQp1c2RjnerNm";
-		System.out.println(textEncrypter.decrypt(val));
+	public static String decrypt(String str) {
+		return textEncrypter.decrypt(str);
+	}
+
+	public static String encode(CharSequence password) {
+		return encoder.encode(password);
+	}
+
+	public static boolean matches(String password, String encodedPassword) {
+		return encoder.matches(password, encodedPassword);
 	}
 
 }

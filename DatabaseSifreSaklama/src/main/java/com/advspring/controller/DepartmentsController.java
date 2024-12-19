@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,7 @@ public class DepartmentsController {
 	private ModelMapper mapper;
 
 	@GetMapping("/dept")
+	@CrossOrigin(originPatterns = "http://localhost:8080")
 	public ResponseEntity<List<DepartmentsResponseDTO>> getAllDepartments() {
 		List<Departments> departments = departmentsService.getAllDepartments();
 		List<DepartmentsResponseDTO> result = departments.stream().map(d -> mapper.map(d, DepartmentsResponseDTO.class))
