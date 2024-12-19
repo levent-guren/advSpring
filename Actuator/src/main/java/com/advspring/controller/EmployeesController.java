@@ -16,7 +16,10 @@ import com.advspring.dto.EmpsByNameRequestDTO;
 import com.advspring.entity.Employees;
 import com.advspring.service.EmployeesService;
 
+import lombok.extern.log4j.Log4j2;
+
 @RestController
+@Log4j2
 public class EmployeesController {
 	@Autowired
 	private EmployeesService employeesService;
@@ -37,7 +40,7 @@ public class EmployeesController {
 //			dto.setLastName(e.getLastName());
 //			return dto;
 //		}).toList();
-
+		log.error("getAllEmployees");
 		List<AllEmployeesResponseDTO> result = emps.stream()
 				.map(e -> mapperResponse.map(e, AllEmployeesResponseDTO.class)).toList();
 		return ResponseEntity.ok(result);
